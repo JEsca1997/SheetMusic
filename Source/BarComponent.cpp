@@ -15,11 +15,21 @@
 //==============================================================================
 BarComponent::BarComponent()
 {
-    
+    addAndMakeVisible(play_head);
+    startTimer(42);
 }
 
 BarComponent::~BarComponent()
 {
+}
+
+void BarComponent::timerCallback()
+{
+    if (my_state)
+    {
+        index++;
+        resized();
+    }
 }
 
 void BarComponent::paint (juce::Graphics& g)
@@ -40,4 +50,5 @@ void BarComponent::paint (juce::Graphics& g)
 void BarComponent::resized()
 {
     grid.setBounds(0, 0, getWidth(), getHeight());
+    play_head.setBounds(index, 0, 2, getHeight());
 }

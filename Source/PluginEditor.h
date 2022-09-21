@@ -43,6 +43,19 @@ private:
     TreeViewItemComponent* treble_Cleff;
     TreeViewItemComponent* Notes;
     TreeViewItemComponent* Accidentals;
+    TreeViewItemComponent* Grace_Notes;
+    TreeViewItemComponent* key_Signatures;
+    TreeViewItemComponent* time_Signatures;
+    TreeViewItemComponent* Barlines;
+    TreeViewItemComponent* Lines;
+    TreeViewItemComponent* arpeggios_glissandos;
+    TreeViewItemComponent* breathes_pauses;
+    TreeViewItemComponent* brackets;
+    TreeViewItemComponent* articulations_Ornaments;
+    TreeViewItemComponent* Tempo;
+    TreeViewItemComponent* dynamics;
+    TreeViewItemComponent* repeats_jumps;
+    TreeViewItemComponent* breaks_spacer;
 
     TextButton play_Button { "Play" };
 

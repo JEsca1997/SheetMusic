@@ -1,8 +1,8 @@
 /*
   ==============================================================================
 
-    SheetComponent.h
-    Created: 8 Sep 2022 1:36:26pm
+    PlayheadComponent.h
+    Created: 18 Sep 2022 1:28:28pm
     Author:  QWERTY SENPAI
 
   ==============================================================================
@@ -11,28 +11,22 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "SheetGridComponent.h"
-#include "StaffComponent.h"
 
 using namespace juce;
 
 //==============================================================================
 /*
 */
-class SheetComponent  : public juce::Component
+
+class PlayheadComponent  : public juce::Component
 {
 public:
-    SheetComponent();
-    ~SheetComponent() override;
+    PlayheadComponent();
+    ~PlayheadComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
-    void setState(bool state);
-
 private:
-
-    OwnedArray<StaffComponent> staffs;
-
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SheetComponent)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlayheadComponent)
 };

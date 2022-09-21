@@ -29,6 +29,14 @@ StaffComponent::~StaffComponent()
 
 }
 
+void StaffComponent::setBarPlayheadState(bool state)
+{
+    for (int c = 0; c < 4; c++)
+    {
+        bars[c]->setPlayheadOn(state);
+    }
+}
+
 bool StaffComponent::isInterestedInDragSource(const SourceDetails& dragSourceDetails)
 {
     return true;

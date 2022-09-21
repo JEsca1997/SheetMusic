@@ -17,7 +17,20 @@ SheetMusicAudioProcessorEditor::SheetMusicAudioProcessorEditor (SheetMusicAudioP
     treble_Cleff(new TreeViewItemComponent("Treble")),
     bass_Cleff(new TreeViewItemComponent("Bass")),
     Notes(new TreeViewItemComponent("Notes")),
-    Accidentals(new TreeViewItemComponent("Accidentals"))
+    Accidentals(new TreeViewItemComponent("Accidentals")),
+    Grace_Notes(new TreeViewItemComponent("Grace Notes")),
+    key_Signatures(new TreeViewItemComponent("Key Signatures")),
+    time_Signatures(new TreeViewItemComponent("time_Signatures")),
+    Barlines(new TreeViewItemComponent("Barlines")),
+    Lines(new TreeViewItemComponent("Lines")),
+    arpeggios_glissandos(new TreeViewItemComponent("Arpeggios/Glissandos")),
+    breathes_pauses(new TreeViewItemComponent("Breathes/Pauses")),
+    brackets(new TreeViewItemComponent("Brackets")),
+    articulations_Ornaments(new TreeViewItemComponent("Articulations/Ornaments")),
+    Tempo(new TreeViewItemComponent("Tempo")),
+    dynamics(new TreeViewItemComponent("Dynamics")),
+    repeats_jumps(new TreeViewItemComponent("Repeats/Jumps")),
+    breaks_spacer(new TreeViewItemComponent("Breaks/Spaces"))
 {
     title.setColour(TextEditor::ColourIds::backgroundColourId, Colours::white);
     title.setColour(TextEditor::ColourIds::textColourId, Colours::black);
@@ -48,10 +61,12 @@ SheetMusicAudioProcessorEditor::SheetMusicAudioProcessorEditor (SheetMusicAudioP
         if (play_Button.getToggleState())
         {
             play_Button.setToggleState(false, NotificationType::dontSendNotification);
+            sheet.setState(true);
         }
         else
         {
             play_Button.setToggleState(true, NotificationType::dontSendNotification);
+            sheet.setState(false);
         }
     };
 
@@ -59,10 +74,23 @@ SheetMusicAudioProcessorEditor::SheetMusicAudioProcessorEditor (SheetMusicAudioP
     root->addSubItem(Notes);
     root->addSubItem(Accidentals);
 
-
     Cleffs->addSubItem(treble_Cleff);
     Cleffs->addSubItem(bass_Cleff);
-   
+
+    root->addSubItem(Grace_Notes);
+    root->addSubItem(key_Signatures);
+    root->addSubItem(time_Signatures);
+    root->addSubItem(Barlines);
+    root->addSubItem(Lines);
+    root->addSubItem(arpeggios_glissandos);
+    root->addSubItem(breathes_pauses);
+    root->addSubItem(brackets);
+    root->addSubItem(articulations_Ornaments);
+    root->addSubItem(Tempo);
+    root->addSubItem(dynamics);
+    root->addSubItem(repeats_jumps);
+    root->addSubItem(breaks_spacer);
+
 
 
 }

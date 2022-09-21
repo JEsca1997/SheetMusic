@@ -29,6 +29,8 @@ public:
     bool isInterestedInDragSource(const SourceDetails& dragSourceDetails) override;
     void itemDropped(const SourceDetails& dragSourceDetails) override;
 
+    void setBarPlayheadState(bool state);
+
 
     void paint (juce::Graphics&) override;
     void resized() override;

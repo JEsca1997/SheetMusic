@@ -16,12 +16,14 @@ StaffHeaderComponent::StaffHeaderComponent(headerInfo info)
 {
     if (info == headerInfo::BassCleff)
     {
-        bassCleff.setImage(ImageCache::getFromMemory(BinaryData::Orange_png, BinaryData::Orange_pngSize));
+        bassCleff.setImage(ImageCache::getFromMemory(BinaryData::Bass_Clef_png, BinaryData::Bass_Clef_pngSize));
+        bassCleff.setBoundingBox(Rectangle<float>(0, -6, 50, 73));
         addAndMakeVisible(bassCleff);
     }
     if (info == headerInfo::TrebleCleff)
     {
-        trebleCleff.setImage(ImageCache::getFromMemory(BinaryData::Orange_png, BinaryData::Orange_pngSize));
+        trebleCleff.setImage(ImageCache::getFromMemory(BinaryData::Treble_Clef_png, BinaryData::Treble_Clef_pngSize));
+        trebleCleff.setBoundingBox(juce::Rectangle<float>(0, -10, 50, 97));
         addAndMakeVisible(trebleCleff);
     }
 }
@@ -32,7 +34,7 @@ bool StaffHeaderComponent::isInterestedInDragSource(const SourceDetails& dragSou
 }
 void StaffHeaderComponent::itemDropped(const SourceDetails& dragSourceDetails)
 {
-    DBG("Item Dropped");
+  
 }
 
 StaffHeaderComponent::~StaffHeaderComponent()
@@ -42,7 +44,11 @@ StaffHeaderComponent::~StaffHeaderComponent()
 
 void StaffHeaderComponent::paint (juce::Graphics& g)
 {
-   
+    g.drawLine(0, 0, 0, getHeight());
+    for (int c = 0; c < 6; c++)
+    {
+        g.drawLine(0, c * (1.2) * getHeight() / 6, getWidth(), c * (1.2) * getHeight() / 6);
+    }
 
 }
 

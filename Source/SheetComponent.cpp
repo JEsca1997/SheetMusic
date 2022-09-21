@@ -20,11 +20,20 @@ SheetComponent::SheetComponent()
     {
         staffs.add(new StaffComponent);
     }
+
 }
 
 SheetComponent::~SheetComponent()
 {
 
+}
+
+void SheetComponent::setState(bool state)
+{
+    for (int c = 0; c < 8; c++)
+    {
+        staffs[c]->setBarPlayheadState(state);
+    }
 }
 
 void SheetComponent::paint (juce::Graphics& g)
