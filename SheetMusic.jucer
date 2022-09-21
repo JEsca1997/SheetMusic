@@ -4,9 +4,15 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="P28E61" name="SheetMusic">
     <GROUP id="{7829994B-52D8-42B6-B9E2-BBB0C93996E4}" name="Resources">
-      <FILE id="DAU3rj" name="Orange.png" compile="0" resource="1" file="Resources/Orange.png"/>
+      <FILE id="lOYL18" name="Bass_Clef.png" compile="0" resource="1" file="Resources/Bass_Clef.png"/>
+      <FILE id="MIJmW8" name="Orange.png" compile="0" resource="1" file="Resources/Orange.png"/>
+      <FILE id="QPydCb" name="Treble_Clef.png" compile="0" resource="1" file="Resources/Treble_Clef.png"/>
     </GROUP>
     <GROUP id="{9B85485E-E65F-91F0-7AF3-151D097DA2AA}" name="Source">
+      <FILE id="zN3E91" name="PlayheadComponent.cpp" compile="1" resource="0"
+            file="Source/PlayheadComponent.cpp"/>
+      <FILE id="A4ax0L" name="PlayheadComponent.h" compile="0" resource="0"
+            file="Source/PlayheadComponent.h"/>
       <FILE id="FNmdTN" name="StaffHeaderComponent.cpp" compile="1" resource="0"
             file="Source/StaffHeaderComponent.cpp"/>
       <FILE id="VAL58s" name="StaffHeaderComponent.h" compile="0" resource="0"
