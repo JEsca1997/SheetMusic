@@ -112,6 +112,8 @@ SheetMusicAudioProcessorEditor::SheetMusicAudioProcessorEditor (SheetMusicAudioP
     addAndMakeVisible(button18);
     addAndMakeVisible(button19);
 
+
+
 }
 
 SheetMusicAudioProcessorEditor::~SheetMusicAudioProcessorEditor()
@@ -136,7 +138,6 @@ void SheetMusicAudioProcessorEditor::resized()
     title.setBounds(getWidth() / 3, 0, getWidth() / 4, getHeight() / 20);
     author.setBounds(getWidth() / 3, getHeight()/20, getWidth() / 4, getHeight() / 20);
 
-
     button1.setBounds(getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
     button2.setBounds(2*getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
     button3.setBounds(3*getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
@@ -147,7 +148,6 @@ void SheetMusicAudioProcessorEditor::resized()
     button7.setBounds(2*getWidth()/16, getHeight() / 20, getWidth() / 16, getHeight() / 20);
     button8.setBounds(3*getWidth()/16, getHeight() / 20, getWidth() / 16, getHeight() / 20);
     button9.setBounds(4*getWidth() / 16, getHeight()/20, getWidth() / 16, getHeight() / 20);
-
 
     button10.setBounds(10*getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
     button11.setBounds(11*getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
@@ -161,5 +161,4 @@ void SheetMusicAudioProcessorEditor::resized()
     button18.setBounds(13 * getWidth() / 16, getHeight()/20, getWidth() / 16, getHeight() / 20);
     button19.setBounds(14 * getWidth() / 16, getHeight()/20, getWidth() / 16, getHeight() / 20);
 
-   
 }

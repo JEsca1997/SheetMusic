@@ -57,36 +57,34 @@ private:
     TreeViewItemComponent* repeats_jumps;
     TreeViewItemComponent* breaks_spacer;
 
+    TextButton button1{ "File" };
+    TextButton button2{ "Edit" };
+    TextButton button3{ "View" };
+    TextButton button4{ "Add" };
 
-    TextButton button1;
-    TextButton button2;
-    TextButton button3;
-    TextButton button4;
-    TextButton button5;
-    TextButton button6;
-    TextButton button7;
-    TextButton button8;
-    TextButton button9;
-    TextButton button10;
+    TextButton button5{ "1/32" };
+    TextButton button6{ "1/16" };
+    TextButton button7{ "1/8" };
+    TextButton button8{ "1/4" };
+    TextButton button9{ "1/2" };
 
-    TextButton button11;
-    TextButton button12;
-    TextButton button13;
-    TextButton button14;
-    TextButton button15;
-    TextButton button16;
-    TextButton button17;
-    TextButton button18;
-    TextButton button19;
-    TextButton button20;
+    TextButton button10{ "Format" };
+    TextButton button11{ "Tools" };
+    TextButton button12{ "Plugins" };
+    TextButton button13{ "Help" };
+    TextButton button14{ "Options" };
 
+    TextButton button15{ "Repeat" };
+    TextButton button16{ "Metronome" };
+    TextButton button17{ "MIDI" };
+    TextButton button18{ "Save" };
+    TextButton button19{ "Print" };
+    TextButton button20{ "20" };
 
     TextButton play_Button { "Play" };
 
     TextEditor title{ "Title" };
     TextEditor author{ "Author" };
    
-
-
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SheetMusicAudioProcessorEditor)
 };

@@ -17,7 +17,7 @@ StaffHeaderComponent::StaffHeaderComponent(headerInfo info)
         bassCleff.setImage(ImageCache::getFromMemory(BinaryData::Bass_Clef_png, BinaryData::Bass_Clef_pngSize));
         bassCleff.setBoundingBox(Rectangle<float>(0, -6, 50, 73));
         trebleCleff.setImage(ImageCache::getFromMemory(BinaryData::Treble_Clef_png, BinaryData::Treble_Clef_pngSize));
-        trebleCleff.setBoundingBox(juce::Rectangle<float>(0, -10, 50, 97));
+        trebleCleff.setBoundingBox(juce::Rectangle<float>(0, -10, 60, 97));
 }
 
 bool StaffHeaderComponent::isInterestedInDragSource(const SourceDetails& dragSourceDetails)
@@ -43,7 +43,7 @@ void StaffHeaderComponent::itemDropped(const SourceDetails& dragSourceDetails)
 
 StaffHeaderComponent::~StaffHeaderComponent()
 {
-
+    
 }
 
 void StaffHeaderComponent::paint (juce::Graphics& g)
