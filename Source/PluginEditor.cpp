@@ -91,7 +91,26 @@ SheetMusicAudioProcessorEditor::SheetMusicAudioProcessorEditor (SheetMusicAudioP
     root->addSubItem(repeats_jumps);
     root->addSubItem(breaks_spacer);
 
+    addAndMakeVisible(button1);
+    addAndMakeVisible(button2);
+    addAndMakeVisible(button3);
+    addAndMakeVisible(button4);
+    addAndMakeVisible(button5);
+    addAndMakeVisible(button6);
+    addAndMakeVisible(button7);
+    addAndMakeVisible(button8);
+    addAndMakeVisible(button9);
+    addAndMakeVisible(button10);
 
+    addAndMakeVisible(button11);
+    addAndMakeVisible(button12);
+    addAndMakeVisible(button13);
+    addAndMakeVisible(button14);
+    addAndMakeVisible(button15);
+    addAndMakeVisible(button16);
+    addAndMakeVisible(button17);
+    addAndMakeVisible(button18);
+    addAndMakeVisible(button19);
 
 }
 
@@ -116,4 +135,31 @@ void SheetMusicAudioProcessorEditor::resized()
     tree.setBounds(0, getHeight()/10, getWidth() / 6, 9*getHeight()/10);
     title.setBounds(getWidth() / 3, 0, getWidth() / 4, getHeight() / 20);
     author.setBounds(getWidth() / 3, getHeight()/20, getWidth() / 4, getHeight() / 20);
+
+
+    button1.setBounds(getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
+    button2.setBounds(2*getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
+    button3.setBounds(3*getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
+    button4.setBounds(4*getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
+
+    button5.setBounds(0, getHeight() / 20, getWidth() / 16, getHeight() / 20);
+    button6.setBounds(getWidth()/16, getHeight() / 20, getWidth() / 16, getHeight() / 20);
+    button7.setBounds(2*getWidth()/16, getHeight() / 20, getWidth() / 16, getHeight() / 20);
+    button8.setBounds(3*getWidth()/16, getHeight() / 20, getWidth() / 16, getHeight() / 20);
+    button9.setBounds(4*getWidth() / 16, getHeight()/20, getWidth() / 16, getHeight() / 20);
+
+
+    button10.setBounds(10*getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
+    button11.setBounds(11*getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
+    button12.setBounds(12*getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
+    button13.setBounds(13*getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
+    button14.setBounds(14*getWidth() / 16, 0, getWidth()/16, getHeight() / 20);
+    
+    button15.setBounds(10 * getWidth() / 16, getHeight()/20, getWidth() / 16, getHeight() / 20);
+    button16.setBounds(11 * getWidth() / 16, getHeight()/20, getWidth() / 16, getHeight() / 20);
+    button17.setBounds(12 * getWidth() / 16, getHeight()/20, getWidth() / 16, getHeight() / 20);
+    button18.setBounds(13 * getWidth() / 16, getHeight()/20, getWidth() / 16, getHeight() / 20);
+    button19.setBounds(14 * getWidth() / 16, getHeight()/20, getWidth() / 16, getHeight() / 20);
+
+   
 }

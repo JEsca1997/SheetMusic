@@ -57,6 +57,30 @@ private:
     TreeViewItemComponent* repeats_jumps;
     TreeViewItemComponent* breaks_spacer;
 
+
+    TextButton button1;
+    TextButton button2;
+    TextButton button3;
+    TextButton button4;
+    TextButton button5;
+    TextButton button6;
+    TextButton button7;
+    TextButton button8;
+    TextButton button9;
+    TextButton button10;
+
+    TextButton button11;
+    TextButton button12;
+    TextButton button13;
+    TextButton button14;
+    TextButton button15;
+    TextButton button16;
+    TextButton button17;
+    TextButton button18;
+    TextButton button19;
+    TextButton button20;
+
+
     TextButton play_Button { "Play" };
 
     TextEditor title{ "Title" };
