@@ -16,40 +16,130 @@ using namespace juce;
 //==============================================================================
 SheetGridComponent::SheetGridComponent()
 {
-    for (int c = 0; c < 4; c++)
+    for (int c = 0; c < 16; c++)
     {
-        cells_1.add(new CellComponent);
-        cells_2.add(new CellComponent);
-        cells_3.add(new CellComponent);
-        cells_4.add(new CellComponent);
-        cells_5.add(new CellComponent);
-
-        addAndMakeVisible(cells_1[c]);
-        addAndMakeVisible(cells_2[c]);
-        addAndMakeVisible(cells_3[c]);
-        addAndMakeVisible(cells_4[c]);
-        addAndMakeVisible(cells_5[c]);
-
+        cells.add(new OwnedArray<CellComponent>);
+    }
+    for (int c = 0; c < 16; c++)
+    {
+        for (int x = 0; x < 4; x++)
+        {
+            cells[c]->add(new CellComponent);
+            addAndMakeVisible(cells[c]->operator[](x));
+        }
     }
 }
 
 SheetGridComponent::~SheetGridComponent()
 {
 }
-
-void SheetGridComponent::paint (juce::Graphics& g)
+void SheetGridComponent::addExtraLine()
 {
+    cells.add(new OwnedArray<CellComponent>);
+    for (int c = 0; c < numBeats; c++)
+    {
+        cells[cells.size() - 1]->add(new CellComponent);
+        addAndMakeVisible(cells[cells.size() - 1]->operator[](c));
+    }
+    resized();
+}
+void SheetGridComponent::addExtraBeat()
+{
+    numBeats++;
+    for (int c = 0; c < 16; c++)
+    {
+        cells[c]->add(new CellComponent);
+        addAndMakeVisible(cells[c]->operator[](cells[c]->size()-1));
+    }
+    resized();
+}
+void SheetGridComponent::addExtraBeat(int num)
+{
+    for (int c = 0; c < num; c++)
+    {
+        addExtraBeat();
+    }
+}
 
+void SheetGridComponent::turnOnBeat(String key, int beat)
+{
+    if (key.contains("A"))
+    {
+        cells[5]->operator[](beat)->turnOn();
+    }
+    if (key.contains("B"))
+    {
+
+    }
+    if (key.contains("C"))
+    {
+        cells[4]->operator[](beat)->turnOn();
+    }
+    if (key.contains("D"))
+    {
+
+    }
+    if (key.contains("E"))
+    {
+        cells[3]->operator[](beat)->turnOn();
+    }
+    if (key.contains("F"))
+    {
+        cells[6]->operator[](beat)->turnOn();
+    }
+    if (key.contains("G"))
+    {
+
+    }
+}
+
+
+void SheetGridComponent::turnOffBeat(String key, int beat)
+{
+    if (key.contains("A"))
+    {
+        cells[5]->operator[](beat)->turnOff();
+    }
+    if (key.contains("B"))
+    {
+
+    }
+    if (key.contains("C"))
+    {
+        cells[4]->operator[](beat)->turnOff();
+    }
+    if (key.contains("D"))
+    {
+
+    }
+    if (key.contains("E"))
+    {
+        cells[3]->operator[](beat)->turnOff();
+    }
+    if (key.contains("F"))
+    {
+        cells[6]->operator[](beat)->turnOff();
+    }
+    if (key.contains("G"))
+    {
+
+    }
+}
+
+void SheetGridComponent::paint(juce::Graphics& g)
+{
+    
 }
 
 void SheetGridComponent::resized()
 {
-    for (int c = 0; c < 4; c++)
+    int size = cells.size();
+
+    for (int c = 0; c < size ; c++)
     {
-        cells_1[c]->setBounds(c * getWidth()/4, 0, getWidth() / 4, getHeight()/5);
-        cells_2[c]->setBounds(c * getWidth() / 4,  getHeight() / 5, getWidth()/4, getHeight()/5);
-        cells_3[c]->setBounds(c * getWidth() / 4, 2 * getHeight() / 5, getWidth()/4, getHeight()/5);
-        cells_4[c]->setBounds(c * getWidth() / 4, 3 * getHeight() / 5, getWidth()/4, getHeight()/5);
-        cells_5[c]->setBounds(c * getWidth() / 4, 4 * getHeight() / 5, getWidth() / 4, getHeight() / 5);
+        for (int x = 0; x < numBeats; x++)
+        {
+            cells[c]->operator[](x)->setBounds(x * getWidth()/numBeats, c * getHeight() / size, getWidth() / numBeats, getHeight() / size);
+        }
     }
 }

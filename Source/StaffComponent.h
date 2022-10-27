@@ -23,20 +23,26 @@ using namespace juce;
 class StaffComponent  : public juce::Component, public DragAndDropTarget
 {
 public:
-    StaffComponent();
+    StaffComponent(int staff);
     ~StaffComponent() override;
 
     bool isInterestedInDragSource(const SourceDetails& dragSourceDetails) override;
     void itemDropped(const SourceDetails& dragSourceDetails) override;
 
-    void setBarPlayheadState(bool state);
+    void setBarPlayheadState(bool state, int bar);
 
-
+    void addBeat();
     void paint (juce::Graphics&) override;
     void resized() override;
+    void addLine();
+    void turnOnBeat(String key, int bar, int beat);
+    BarComponent* getBarAt(int index);
+    void setStaffNum(int num) { staff_num = num; };
+    int getStaffNum() { return staff_num; };
 
 private:
 
+    int staff_num = 0;
     OwnedArray<BarComponent> bars;
     StaffHeaderComponent headerComponent{ headerInfo::BassCleff };
 

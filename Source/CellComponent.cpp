@@ -22,6 +22,21 @@ CellComponent::~CellComponent()
 
 }
 
+void CellComponent::setName(String name)
+{
+    this->name = name;
+}
+
+void CellComponent::turnOn()
+{
+    isDown = true;
+    repaint();
+}
+void CellComponent::turnOff()
+{
+    isDown = false;
+    repaint();
+}
 void CellComponent::mouseDown(const MouseEvent& e)
 {
     isDown = !isDown;

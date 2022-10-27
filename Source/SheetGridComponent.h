@@ -28,14 +28,16 @@ public:
 
     void paint (juce::Graphics&) override;
     void resized() override;
+    void addExtraBeat();
+    void addExtraBeat(int num);
+    void addExtraLine();
+    void turnOnBeat(String key, int beat);
+    void turnOffBeat(String key, int beat);
 
 private:
-
-    OwnedArray<CellComponent> cells_1; 
-    OwnedArray<CellComponent> cells_2;
-    OwnedArray<CellComponent> cells_3;
-    OwnedArray<CellComponent> cells_4;
-    OwnedArray<CellComponent> cells_5;
+    OwnedArray<OwnedArray<CellComponent>> cells;
+    int numCells = 5;
+    int numBeats = 4;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SheetGridComponent)
 };

@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="YW8FYd" name="SheetMusic" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
+              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
   <MAINGROUP id="P28E61" name="SheetMusic">
     <GROUP id="{7829994B-52D8-42B6-B9E2-BBB0C93996E4}" name="Resources">
       <FILE id="lOYL18" name="Bass_Clef.png" compile="0" resource="1" file="Resources/Bass_Clef.png"/>
       <FILE id="MIJmW8" name="Orange.png" compile="0" resource="1" file="Resources/Orange.png"/>
       <FILE id="QPydCb" name="Treble_Clef.png" compile="0" resource="1" file="Resources/Treble_Clef.png"/>
+      <FILE id="kD3Xgq" name="Channel_bg.png" compile="0" resource="1" file="Resources/Channel_bg.png"/>
     </GROUP>
     <GROUP id="{9B85485E-E65F-91F0-7AF3-151D097DA2AA}" name="Source">
+      <FILE id="saBhxi" name="NotesSectionComponent.h" compile="0" resource="0"
+            file="Source/NotesSectionComponent.h"/>
+      <FILE id="KwOjT7" name="NotesSectionComponent.cpp" compile="1" resource="0"
+            file="Source/NotesSectionComponent.cpp"/>
       <FILE id="zN3E91" name="PlayheadComponent.cpp" compile="1" resource="0"
             file="Source/PlayheadComponent.cpp"/>
       <FILE id="A4ax0L" name="PlayheadComponent.h" compile="0" resource="0"
@@ -72,6 +78,7 @@
         <MODULEPATH id="juce_graphics" path="../../JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
       </MODULEPATHS>
     </VS2017>
     <VS2019 targetFolder="Builds/VisualStudio2019">
@@ -92,6 +99,7 @@
         <MODULEPATH id="juce_graphics" path="../../JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
       </MODULEPATHS>
     </VS2019>
     <VS2022 targetFolder="Builds/VisualStudio2022">
@@ -112,6 +120,7 @@
         <MODULEPATH id="juce_graphics" path="../../JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
       </MODULEPATHS>
     </VS2022>
     <XCODE_MAC targetFolder="Builds/MacOSX">
@@ -132,6 +141,7 @@
         <MODULEPATH id="juce_graphics" path="../../JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
   </EXPORTFORMATS>
@@ -145,6 +155,7 @@
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>

@@ -24,12 +24,16 @@ public:
     ~CellComponent() override;
 
     void mouseDown(const MouseEvent& e) override;
+    void turnOn();
+    void turnOff();
 
     void paint (juce::Graphics&) override;
     void resized() override;
+    void setName(String name);
 
 private:
 
+    String name;
     bool isDown = false; 
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CellComponent)

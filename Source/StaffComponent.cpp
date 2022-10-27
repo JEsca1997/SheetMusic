@@ -14,11 +14,14 @@
 using namespace juce;
 
 //==============================================================================
-StaffComponent::StaffComponent()
+
+StaffComponent::StaffComponent(int staff)
 {
+    staff_num = staff;
     for (int c = 0; c < 4; c++)
     {
-        bars.add(new BarComponent);
+        bars.add(new BarComponent(c,true));
+        bars[c]->setStaffAndBarNumber(staff_num, c);
         addAndMakeVisible(bars[c]);
     }
     addAndMakeVisible(headerComponent);
@@ -29,12 +32,34 @@ StaffComponent::~StaffComponent()
 
 }
 
-void StaffComponent::setBarPlayheadState(bool state)
+void StaffComponent::turnOnBeat(String key, int bar, int beat)
+{
+    bars[bar]->turnOnBeat(key, beat);
+}
+
+void StaffComponent::addBeat()
 {
     for (int c = 0; c < 4; c++)
     {
-        bars[c]->setPlayheadOn(state);
+      bars[c]->addBeat();
     }
+}
+void StaffComponent::addLine()
+{
+    for (int c = 0; c < 4; c++)
+    {
+        bars[c]->addLine();
+    }
+}
+
+BarComponent* StaffComponent::getBarAt(int index)
+{
+    return bars[index];
+}
+
+void StaffComponent::setBarPlayheadState(bool state, int bar)
+{
+     bars[bar]->setPlayheadOn(state);
 }
 
 bool StaffComponent::isInterestedInDragSource(const SourceDetails& dragSourceDetails)

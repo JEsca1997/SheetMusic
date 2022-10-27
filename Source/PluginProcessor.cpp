@@ -22,13 +22,36 @@ SheetMusicAudioProcessor::SheetMusicAudioProcessor()
                        )
 #endif
 {
+    manager.registerBasicFormats();
+    for (int c = 0; c < mNumVoices; c++)
+    {
+        mSampler.addVoice(new SamplerVoice());
+    }
 }
 
 SheetMusicAudioProcessor::~SheetMusicAudioProcessor()
 {
+    mFormatReader = nullptr; 
 }
 
 //==============================================================================
+
+void SheetMusicAudioProcessor::loadFile()
+{
+    FileChooser chooser("", {}, {}, false, false, nullptr);
+    if (chooser.browseForFileToOpen())
+      {
+        auto file = chooser.getResult();
+         if (file.getFileExtension().equalsIgnoreCase(".wav") || file.getFileExtension().equalsIgnoreCase(".mp3") || file.getFileExtension().equalsIgnoreCase(".ogg") || file.getFileExtension().equalsIgnoreCase(".aiff"))
+         {
+             mFormatReader = manager.createReaderFor(file);
+             BigInteger range;
+             range.setRange(0, 128, true);
+             mSampler.addSound(new SamplerSound("Sample", *mFormatReader, range, 60, 0.1, 0.1, 10.0));
+         }
+      }
+}
+
 const juce::String SheetMusicAudioProcessor::getName() const
 {
     return JucePlugin_Name;
@@ -93,8 +116,7 @@ void SheetMusicAudioProcessor::changeProgramName (int index, const juce::String&
 //==============================================================================
 void SheetMusicAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    mSampler.setCurrentPlaybackSampleRate(sampleRate);
 }
 
 void SheetMusicAudioProcessor::releaseResources()
@@ -129,33 +151,43 @@ bool SheetMusicAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 }
 #endif
 
-void SheetMusicAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+void SheetMusicAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
-
-    // In case we have more outputs than inputs, this code clears any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    // This is here to avoid people getting screaming feedback
-    // when they first compile a plugin, but obviously you don't need to keep
-    // this code if your algorithm always overwrites all the output channels.
-    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
-
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
+    for (auto i = totalNumInputChannels; i < getTotalNumOutputChannels(); ++i)
     {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
+        buffer.clear(i, 0, buffer.getNumSamples());
     }
+     mSampler.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+
+     if (midiMessages.getNumEvents() != 0)
+     {
+         int index = 0;
+         for (auto message : midiMessages)
+         {
+             auto key = message.getMessage().getMidiNoteName(message.getMessage().getNoteNumber(), true, false, 4);
+             auto isOn = message.getMessage().isNoteOn();
+             if (message.getMessage().isNoteOn())
+             {
+                 auto* key_info = new KeyInfo(key, isOn);
+                 key_infos.push_back(*key_info);
+             }
+             else if (message.getMessage().isNoteOff())
+             {
+                 key_infos.erase(key_infos.begin() + index);
+                 index--;
+             }
+             index++;
+         }
+     }
+}
+
+
+std::vector<KeyInfo> SheetMusicAudioProcessor::getTempMidiBuffer()
+{
+    return key_infos;
 }
 
 //==============================================================================

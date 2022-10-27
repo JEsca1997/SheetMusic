@@ -142,3 +142,21 @@ Builds/MacOSX/SheetMusic.xcodeproj/project.pbxproj
 Builds/VisualStudio2017/resources.rc
 Builds/VisualStudio2017/SheetMusic.sln
 Builds/VisualStudio2017/SheetMusic_SharedCode.vcxproj
+JuceLibraryCode/include_juce_dsp.mm
+JuceLibraryCode/include_juce_dsp.cpp
+Builds/VisualStudio2022/x64/Debug/Shared Code/NotesSectionComponent.obj
+Builds/VisualStudio2022/x64/Debug/Shared Code/include_juce_dsp.obj
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/f47a3502e8d62835/STAFFCOMPONENT.ipch
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/e38b8963c35dd55e/SHEETGRIDCOMPONENT.ipch
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/d7422cdecf88bde4/INCLUDE_JUCE_GUI_BASICS.ipch
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/d2178b2a6f6b1db5/SCORECOMPONENT.ipch
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/bd075da018dc8eba/INCLUDE_JUCE_AUDIO_FORMATS.ipch
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/bb77e67c0da34e95/CELLCOMPONENT.ipch
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/b10eeb51c13c8d33/INCLUDE_JUCE_AUDIO_PLUGIN_CLIENT_STANDALONE.ipch
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/97ad86f0ef8c8a0d/NOTESSECTIONCOMPONENT.ipch
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/924d4b5297f66c19/INCLUDE_JUCE_AUDIO_PROCESSORS.ipch
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/8818e1b1ea38412d/INCLUDE_JUCE_AUDIO_DEVICES.ipch
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/6ff82c5e421ca194/BARCOMPONENT.ipch
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/4a2598d6fa6b0236/SHEETCOMPONENT.ipch
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/2a820d15e62fe23f/PLUGINPROCESSOR.ipch
+Builds/VisualStudio2022/.vs/SheetMusic/v17/ipch/AutoPCH/23579a6b27cd0da7/INCLUDE_JUCE_AUDIO_BASICS.ipch

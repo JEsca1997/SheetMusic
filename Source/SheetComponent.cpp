@@ -18,9 +18,8 @@ SheetComponent::SheetComponent()
 {
     for (int c = 0; c < 8; c++)
     {
-        staffs.add(new StaffComponent);
+        staffs.add(new StaffComponent(c));
     }
-
 }
 
 SheetComponent::~SheetComponent()
@@ -28,12 +27,44 @@ SheetComponent::~SheetComponent()
 
 }
 
-void SheetComponent::setState(bool state)
+void SheetComponent::turnOnBeat(String key, int staff, int bar, int beat)
+{
+    staffs[staff]->turnOnBeat(key,bar,beat);
+}
+
+void SheetComponent::addLine()
 {
     for (int c = 0; c < 8; c++)
     {
-        staffs[c]->setBarPlayheadState(state);
+        staffs[c]->addLine();
     }
+}
+
+void SheetComponent::addBeat()
+{
+    for (int c = 0; c < 8; c++)
+    {
+        staffs[c]->addBeat();
+    }
+}
+
+BarComponent* SheetComponent::getBarAt(int staff, int index)
+{
+    return staffs[staff]->getBarAt(index);
+}
+
+StaffComponent* SheetComponent::getStaffAt(int index)
+{
+    return staffs[index];
+}
+
+void SheetComponent::setState(bool state,int staff, int bar)
+{
+    // create cross coms for playhead position to bar length, trigger playheads in sequence
+    // iterate through staffs in sequence once the first staff has finished.
+
+    staffs[staff]->setBarPlayheadState(state,bar);
+
 }
 
 void SheetComponent::paint (juce::Graphics& g)
@@ -48,8 +79,8 @@ void SheetComponent::paint (juce::Graphics& g)
 
 void SheetComponent::resized()
 {
-    for (int c = 0; c < 8; c++)
+    for (int c = 0; c < 6; c++)
     {
-        staffs[c]->setBounds(getWidth()/8, c * 1.4 * getHeight() / 12, getWidth()/2, getHeight() / 12);
+        staffs[c]->setBounds(getWidth()/8, c * 2 * getHeight() / 12 + 30, getWidth()/2, getHeight() / 6);
     }
 }
