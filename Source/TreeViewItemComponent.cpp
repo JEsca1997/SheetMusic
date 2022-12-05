@@ -35,9 +35,10 @@ bool TreeViewItemComponent::mightContainSubItems()
     return true;
 }
 
-juce::Component* TreeViewItemComponent::createItemComponent()
+std::unique_ptr<Component> TreeViewItemComponent::createItemComponent()
 {
-    TextButton* button = new TextButton(my_name);
+    std::unique_ptr<TextButton> button;
+    button.reset(new TextButton(my_name));
     button->addMouseListener(this, true);
     return button;
 }

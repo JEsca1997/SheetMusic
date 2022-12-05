@@ -23,8 +23,10 @@ public:
     TreeViewItemComponent(String name);
     ~TreeViewItemComponent() override;
 
+
     bool mightContainSubItems() override;
-    juce::Component* createItemComponent() override;
+    std::unique_ptr<Component> createItemComponent() override;
+    //juce::Component* createItemComponent() override;
     int getItemWidth() const override;
     int getItemHeight() const override;
 
