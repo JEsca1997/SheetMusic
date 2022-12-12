@@ -40,7 +40,7 @@ public:
 private:
 
     String my_name{ "" };
-    std::unique_ptr<TextButton> button;
+   std::unique_ptr<TextButton> button;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TreeViewItemComponent)
 };

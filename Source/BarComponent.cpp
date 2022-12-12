@@ -124,7 +124,8 @@ void BarComponent::timerCallback()
         notes[c]->getBuffer();
     }
 
-    notes[0]->updateActiveBuffer();
+
+    notes[current_section]->updateActiveBuffer();
 
 }
 
@@ -145,6 +146,7 @@ void BarComponent::paint (juce::Graphics& g)
     for (int c = 0; c < 5; c++)
     {
         g.drawLine(0, (c+3) * getHeight() / 16, getWidth(), (c+3) * getHeight() / 16);
+
     }
  
 }

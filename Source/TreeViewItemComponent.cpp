@@ -39,6 +39,7 @@ Component* TreeViewItemComponent::createItemComponent()
 {
     button.reset(new TextButton(my_name));
     button->addMouseListener(this, true);
+    //return button.get();
     return button.get();
 }
 

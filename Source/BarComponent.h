@@ -70,6 +70,7 @@ private:
 
     bool p_state = false;
     int index = 0;
+    int current = 0;
 
     // have only one buffer which is the one thats currently playing
     
