@@ -100,6 +100,8 @@ void SheetGridComponent::updateActiveNotesBuffer()
                 int beat = cells[c]->operator[](x)->getBeat();
                 auto* info = new Kinfo(key, beat, true);
 
+                DBG(info->toString() + "In sheet grid component");
+
                 if (bufferPriorsCheck(info))
                 {
                     active_notes_buffer.add(info);

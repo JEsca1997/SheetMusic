@@ -71,7 +71,7 @@ private:
     bool p_state = false;
     int index = 0;
 
-    
+    // have only one buffer which is the one thats currently playing
     
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BarComponent)

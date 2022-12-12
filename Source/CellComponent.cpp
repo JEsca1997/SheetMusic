@@ -39,7 +39,7 @@ void CellComponent::mouseDown(const MouseEvent& e)
 {
     isDown = !isDown;
     repaint();
-    DBG(info.toString());
+   // DBG(info.toString());
 }
 
 void CellComponent::paint (juce::Graphics& g)
