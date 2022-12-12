@@ -35,12 +35,11 @@ bool TreeViewItemComponent::mightContainSubItems()
     return true;
 }
 
-std::unique_ptr<Component> TreeViewItemComponent::createItemComponent()
+Component* TreeViewItemComponent::createItemComponent()
 {
-    std::unique_ptr<TextButton> button;
     button.reset(new TextButton(my_name));
     button->addMouseListener(this, true);
-    return button;
+    return button.get();
 }
 
 int TreeViewItemComponent::getItemWidth() const

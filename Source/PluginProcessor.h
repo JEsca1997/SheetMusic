@@ -16,15 +16,16 @@
 
 using namespace juce;
 
-class KeyInfo
+ class KeyInfo
 {
+
 public :
 
     KeyInfo(String k_param, bool on)
     {
         key = k_param;
         isOn = on;
-    }
+    };
 
     String key;
     bool isOn;

@@ -19,23 +19,61 @@ using namespace juce;
 //==============================================================================
 /*
 */
-class SheetGridComponent : public juce::Component, public MouseListener
+
+class Kinfo
+{
+
+public:
+
+    Kinfo(String k_param, int be, bool on)
+    {
+        key = k_param;
+        beat = be;
+        isOn = on;
+    };
+
+    void setKey(String k) { key = k; };
+    void setOn(bool on) { isOn = on; };
+    void setBeat(int be) { beat = be; };
+    String toString() { return String( " Key :: " + key + " Beat :: " + String(beat) ); };
+
+    String key;
+    bool isOn;
+    int beat;
+
+};
+
+class SheetGridComponent : public juce::Component, public MouseListener //, public AsyncUpdater
 {
 public:
     SheetGridComponent();
     ~SheetGridComponent() override;
 
+    void TriggerUpdate();
+
+    String cellNumberToKey(int num);
 
     void paint (juce::Graphics&) override;
     void resized() override;
+
     void addExtraBeat();
     void addExtraBeat(int num);
     void addExtraLine();
+
     void turnOnBeat(String key, int beat);
     void turnOffBeat(String key, int beat);
 
+    void updateActiveNotesBuffer();
+    bool bufferPriorsCheck(Kinfo* info);
+
+    OwnedArray<Kinfo>* getActiveNotesBuffer() { return &active_notes_buffer; };
+
 private:
+
     OwnedArray<OwnedArray<CellComponent>> cells;
+
+    OwnedArray<Kinfo> active_notes_buffer;
+
     int numCells = 5;
     int numBeats = 4;
 

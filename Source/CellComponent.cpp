@@ -12,19 +12,17 @@
 #include "CellComponent.h"
 
 //==============================================================================
-CellComponent::CellComponent()
+
+CellComponent::CellComponent(String key, int beat, bool state)
 {
-   
+    info.key = key;
+    info.beat = beat;
+    info.isOn = state;
 }
 
 CellComponent::~CellComponent()
 {
 
-}
-
-void CellComponent::setName(String name)
-{
-    this->name = name;
 }
 
 void CellComponent::turnOn()
@@ -41,6 +39,7 @@ void CellComponent::mouseDown(const MouseEvent& e)
 {
     isDown = !isDown;
     repaint();
+    DBG(info.toString());
 }
 
 void CellComponent::paint (juce::Graphics& g)

@@ -16,7 +16,9 @@
 
 NotesSectionComponent::NotesSectionComponent()
 {
+
     addAndMakeVisible(grid);
+   
 }
 
 NotesSectionComponent::~NotesSectionComponent()
@@ -44,6 +46,12 @@ void NotesSectionComponent::setStaffAndBarNumber(int bar, int staff)
 {
     staff_number = staff;
     bar_number = bar;
+}
+
+void NotesSectionComponent::updateActiveBuffer()
+{
+    grid.updateActiveNotesBuffer();
+
 }
 
 void NotesSectionComponent::turnOnBeat(String key)

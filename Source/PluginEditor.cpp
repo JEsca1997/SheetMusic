@@ -662,6 +662,10 @@ void SheetMusicAudioProcessorEditor::timerCallback()
 
     sheet.staffs[current_staff]->getBarAt(current_bar)->isCurrentBarAndStaff(current_staff, current_bar);
 
+    auto bar = sheet.staffs[current_staff]->getBarAt(current_bar);
+
+    
+
     if (current_bar < 4)
     {
         if (play_state)
@@ -697,6 +701,7 @@ void SheetMusicAudioProcessorEditor::timerCallback()
     }
 
     auto messages = audioProcessor.getTempMidiBuffer();
+
     for (auto m : messages)
     {
         auto key = m.key;

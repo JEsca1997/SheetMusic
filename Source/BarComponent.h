@@ -21,9 +21,12 @@ using namespace juce;
 //==============================================================================
 /*
 */
+
 class BarComponent  : public juce::Component, public Timer
 {
+
 public:
+
     BarComponent(int bar, bool first);
     ~BarComponent() override;
 
@@ -57,13 +60,19 @@ private:
 
     bool isFirstTime = false;
     bool isCurrentBar = false;
+
     int current_section = 0;
     int staff_number = 0;
     int bar_number = 0;
+
     OwnedArray<NotesSectionComponent> notes;
     PlayheadComponent play_head;
+
     bool p_state = false;
     int index = 0;
+
+    
+    
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BarComponent)
 };

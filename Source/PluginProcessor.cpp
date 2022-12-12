@@ -27,7 +27,9 @@ SheetMusicAudioProcessor::SheetMusicAudioProcessor()
     {
         mSampler.addVoice(new SamplerVoice());
     }
+
 }
+
 
 SheetMusicAudioProcessor::~SheetMusicAudioProcessor()
 {
@@ -156,10 +158,12 @@ void SheetMusicAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
+
     for (auto i = totalNumInputChannels; i < getTotalNumOutputChannels(); ++i)
     {
         buffer.clear(i, 0, buffer.getNumSamples());
     }
+
      mSampler.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 
      if (midiMessages.getNumEvents() != 0)
@@ -182,6 +186,7 @@ void SheetMusicAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
              index++;
          }
      }
+
 }
 
 

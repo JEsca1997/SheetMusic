@@ -25,7 +25,7 @@ public:
 
 
     bool mightContainSubItems() override;
-    std::unique_ptr<Component> createItemComponent() override;
+    Component* createItemComponent() override;
     //juce::Component* createItemComponent() override;
     int getItemWidth() const override;
     int getItemHeight() const override;
@@ -40,6 +40,7 @@ public:
 private:
 
     String my_name{ "" };
+    std::unique_ptr<TextButton> button;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TreeViewItemComponent)
 };

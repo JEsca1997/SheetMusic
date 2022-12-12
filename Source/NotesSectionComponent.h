@@ -19,6 +19,23 @@
 
 using namespace juce;
 
+class keyInfo
+
+{
+public:
+
+    keyInfo(String k_param, bool on)
+    {
+        key = k_param;
+        isOn = on;
+    }
+
+    String key;
+    bool isOn;
+
+};
+
+
 class NotesSectionComponent  : public juce::Component
 {
 public:
@@ -33,12 +50,18 @@ public:
     void setStaffNumber(int staff);
     void setStaffAndBarNumber(int bar, int staff);
 
+    void updateActiveBuffer();
+
+    OwnedArray<keyInfo>& getBuffer() { return active_buffer; };
+
 private:
 
     int staff_number = 0;
     int bar_number = 0;
     bool shouldColorBackground = false;
     SheetGridComponent grid;
+    
+    OwnedArray<keyInfo> active_buffer;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (NotesSectionComponent)
 };

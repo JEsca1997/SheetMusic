@@ -14,6 +14,8 @@
 using namespace juce;
 
 //==============================================================================
+
+
 SheetGridComponent::SheetGridComponent()
 {
     for (int c = 0; c < 16; c++)
@@ -24,17 +26,93 @@ SheetGridComponent::SheetGridComponent()
     {
         for (int x = 0; x < 4; x++)
         {
-            cells[c]->add(new CellComponent);
+            if (c <= 6 && 3 <= c)
+            {
+                cells[c]->add(new CellComponent(cellNumberToKey(c), x, false));
+            }
+
+            cells[c]->add(new CellComponent("", 0, false));
             addAndMakeVisible(cells[c]->operator[](x));
+
         }
+    }
+}
+
+
+String SheetGridComponent::cellNumberToKey(int num)
+{
+    switch (num)
+    {
+    case 3 :
+        return "E";
+        break;
+    case 4 : 
+        return "C";
+        break;
+    case 5:
+        return "A";
+        break;
+    case 6:
+        return "F";
+        break;
     }
 }
 
 SheetGridComponent::~SheetGridComponent()
 {
+
 }
+
+bool SheetGridComponent::bufferPriorsCheck(Kinfo* info)
+{
+    String key = info->key;
+    int beat = info->beat;
+    bool isdown = info->isOn;
+
+    if (active_notes_buffer.size() != 0)
+    {
+        for (int c = 0; c < active_notes_buffer.size(); c++)
+        {
+            auto* frame = active_notes_buffer[c];
+            bool bKey = (frame->key.equalsIgnoreCase(key));
+            bool bBeat = (beat == frame->beat);
+            bool state = (isdown == frame->isOn);
+
+            if (bKey && bBeat && state)
+            {
+                return false;
+            }
+
+        }
+    }
+    return true;
+}
+
+void SheetGridComponent::updateActiveNotesBuffer()
+{
+    for (int c = 0; c < 16; c++)
+    {
+        for (int x = 0; x < 4; x++)
+        {
+            if (cells[c]->operator[](x)->downState())
+            {
+                String key = cells[c]->operator[](x)->getKey();
+                int beat = cells[c]->operator[](x)->getBeat();
+                auto* info = new Kinfo(key, beat, true);
+
+                if (bufferPriorsCheck(info))
+                {
+                    active_notes_buffer.add(info);
+                }
+
+            }
+        }
+    }
+}
+
 void SheetGridComponent::addExtraLine()
 {
+    /*
     cells.add(new OwnedArray<CellComponent>);
     for (int c = 0; c < numBeats; c++)
     {
@@ -42,9 +120,12 @@ void SheetGridComponent::addExtraLine()
         addAndMakeVisible(cells[cells.size() - 1]->operator[](c));
     }
     resized();
+    */
 }
+
 void SheetGridComponent::addExtraBeat()
 {
+    /*
     numBeats++;
     for (int c = 0; c < 16; c++)
     {
@@ -52,7 +133,9 @@ void SheetGridComponent::addExtraBeat()
         addAndMakeVisible(cells[c]->operator[](cells[c]->size()-1));
     }
     resized();
+    */
 }
+
 void SheetGridComponent::addExtraBeat(int num)
 {
     for (int c = 0; c < num; c++)
@@ -63,6 +146,8 @@ void SheetGridComponent::addExtraBeat(int num)
 
 void SheetGridComponent::turnOnBeat(String key, int beat)
 {
+    active_notes_buffer.add(new Kinfo(key, beat, true));
+
     if (key.contains("A"))
     {
         cells[5]->operator[](beat)->turnOn();
@@ -96,6 +181,14 @@ void SheetGridComponent::turnOnBeat(String key, int beat)
 
 void SheetGridComponent::turnOffBeat(String key, int beat)
 {
+    for (int c = 0; c < active_notes_buffer.size(); c++)
+    {
+        if (active_notes_buffer[c]->key.equalsIgnoreCase(key) && active_notes_buffer[c]->beat == beat)
+        {
+            active_notes_buffer.remove(c);
+        }
+    }
+
     if (key.contains("A"))
     {
         cells[5]->operator[](beat)->turnOff();

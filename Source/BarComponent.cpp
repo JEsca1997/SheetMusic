@@ -16,9 +16,13 @@
 BarComponent::BarComponent(int bar, bool first)
 {
     isFirstTime = first;
+
     bar_number = bar;
+
     addAndMakeVisible(play_head);
+
     startTimer(42);
+
     for (int c = 0; c < 4; c++)
     {
         notes.add(new NotesSectionComponent);
@@ -75,18 +79,18 @@ void BarComponent::isPlayheadInSectionBounds()
   if (index < (current_section + 1) * getWidth() / notes.size() && isCurrentBar)
      {
         setNoteSectionBackgroundColor(current_section, true);
-
      }
   else
      {
-        setNoteSectionBackgroundColor(current_section, false);
+      setNoteSectionBackgroundColor(current_section, false);
         if (p_state)
         {
             if(current_section+1 < notes.size())
             current_section++;
         }
-     }  
+      }  
 }
+
 bool BarComponent::isCurrentBarAndStaff(int staff, int bar)
 {
     if (staff_number == staff && bar_number == bar)
@@ -100,6 +104,7 @@ bool BarComponent::isCurrentBarAndStaff(int staff, int bar)
         return isCurrentBar;
     }
 }
+
 void BarComponent::timerCallback()
 {
     if (p_state && isPlayheadInBounds())
@@ -113,6 +118,14 @@ void BarComponent::timerCallback()
            p_state = false;
            setNoteSectionBackgroundColor(current_section, false);
     }
+
+    for (int c = 0; c < notes.size(); c++)
+    {
+        notes[c]->getBuffer();
+    }
+
+    notes[0]->updateActiveBuffer();
+
 }
 
 bool BarComponent::isPlayheadInBounds()
