@@ -88,11 +88,12 @@ bool SheetGridComponent::bufferPriorsCheck(Kinfo* info)
     return true;
 }
 
-void SheetGridComponent::updateActiveNotesBuffer()
+void SheetGridComponent::updateActiveNotesBuffer(int bar)
 {
     for (int c = 0; c < 16; c++)
     {
-        for (int x = 0; x < 4; x++)
+        //for (int x = 0; x < 4; x++)
+        int x = bar;
         {
             if (cells[c]->operator[](x)->downState())
             {
@@ -101,10 +102,11 @@ void SheetGridComponent::updateActiveNotesBuffer()
                 auto* info = new Kinfo(key, beat, true);
 
                 DBG(info->toString() + "In sheet grid component");
-
                 if (bufferPriorsCheck(info))
                 {
                     active_notes_buffer.add(info);
+                    
+                    //DBG(info->toString() + "in active");
                 }
 
             }

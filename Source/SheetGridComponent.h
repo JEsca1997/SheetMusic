@@ -63,7 +63,7 @@ public:
     void turnOnBeat(String key, int beat);
     void turnOffBeat(String key, int beat);
 
-    void updateActiveNotesBuffer();
+    void updateActiveNotesBuffer(int bar);
     bool bufferPriorsCheck(Kinfo* info);
 
     OwnedArray<Kinfo>* getActiveNotesBuffer() { return &active_notes_buffer; };

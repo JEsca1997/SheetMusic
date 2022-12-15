@@ -48,11 +48,13 @@ void NotesSectionComponent::setStaffAndBarNumber(int bar, int staff)
     bar_number = bar;
 }
 
-void NotesSectionComponent::updateActiveBuffer()
+void NotesSectionComponent::updateActiveBuffer(int bar)
 {
-    grid.updateActiveNotesBuffer();
+    grid.updateActiveNotesBuffer(bar);
 
 }
+
+
 
 void NotesSectionComponent::turnOnBeat(String key)
 {

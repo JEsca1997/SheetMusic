@@ -85,8 +85,9 @@ void BarComponent::isPlayheadInSectionBounds()
       setNoteSectionBackgroundColor(current_section, false);
         if (p_state)
         {
-            if(current_section+1 < notes.size())
-            current_section++;
+            if (current_section + 1 < notes.size())
+                current_section++;
+                
         }
       }  
 }
@@ -124,10 +125,29 @@ void BarComponent::timerCallback()
         notes[c]->getBuffer();
     }
 
+    if (getPlayState()) { 
 
-    notes[current_section]->updateActiveBuffer();
+        //check if the current_section was in the buffer 
+        //bool exists = std::find(std::begin(current_section_buffer), std::end(current_section_buffer), current_section) != std::end(current_section_buffer);
+        //DBG(String(int(exists)) + "Tt");
+
+        int sync = index % 11;  
+
+        
+
+        if (sync==0) {
+                //sync buffer with the buffer 
+               
+                notes[current_section]->updateActiveBuffer((index/12)%4);
+                //if(index/12)
+                //current_section_buffer.add(current_section);
+            }
+                         
+    }
+   
 
 }
+
 
 bool BarComponent::isPlayheadInBounds()
 {

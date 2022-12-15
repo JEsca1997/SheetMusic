@@ -50,7 +50,7 @@ public:
     void setStaffNumber(int staff);
     void setStaffAndBarNumber(int bar, int staff);
 
-    void updateActiveBuffer();
+    void updateActiveBuffer(int bar_number);
 
     OwnedArray<keyInfo>& getBuffer() { return active_buffer; };
 

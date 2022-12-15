@@ -51,6 +51,7 @@ public:
 
     void turnOnBeat(String key, int beat);
     bool isPlayheadInBounds();
+     
     bool getPlayState()
     {
         return p_state;
@@ -72,6 +73,7 @@ private:
     int index = 0;
     int current = 0;
 
+    Array<int> current_section_buffer;
     // have only one buffer which is the one thats currently playing
     
 
