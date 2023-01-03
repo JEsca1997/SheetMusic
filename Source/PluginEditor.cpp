@@ -286,7 +286,9 @@ SheetMusicAudioProcessorEditor::SheetMusicAudioProcessorEditor (SheetMusicAudioP
 
     setSize (1900, 900);
     sheet_port.setViewedComponent(&sheet);
-    sheet_port.setViewPosition(getWidth()/6, 0);
+    sheet_port.setViewPosition(getWidth()/10, 0);
+    sheet_port.setScrollBarsShown(true, true);
+    sheet_port.setScrollBarPosition(false, false);
     addAndMakeVisible(play_Button);
 
     tree.setRootItem(root);
@@ -720,7 +722,7 @@ void SheetMusicAudioProcessorEditor::paint (juce::Graphics& g)
 void SheetMusicAudioProcessorEditor::resized()
 {
     sheet.setBounds(0, 0, getWidth(), 1000);
-    sheet_port.setBounds(getWidth()/5.5, 100, getWidth()/1.5, getHeight() - 60);
+    sheet_port.setBounds(getWidth()/5.5, 100, getWidth()/1.5, getHeight() - 120);
     play_Button.setBounds(0, 0, getWidth()/16, getHeight() / 20);
     tree.setBounds(0, getHeight()/10, getWidth() / 6, getHeight());
     title.setBounds(getWidth() / 3, 0, getWidth() / 4, getHeight() / 20);

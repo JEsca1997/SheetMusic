@@ -34,6 +34,14 @@ public:
 
     void paint (juce::Graphics&) override;
     void resized() override;
+
+    void mouseDown(const MouseEvent& e) override;
+    void setBGColour(juce::Colour color)
+    {
+        bgCol = color;
+    }
+
+
     void setStaffNumber(int staff);
     void setBarNumber(int bar);
     void setStaffAndBarNumber(int staff, int bar);
@@ -76,6 +84,8 @@ private:
     Array<int> current_section_buffer;
     // have only one buffer which is the one thats currently playing
     
+
+    juce::Colour bgCol;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BarComponent)
 };

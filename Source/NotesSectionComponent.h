@@ -53,7 +53,10 @@ public:
     void updateActiveBuffer(int bar_number);
 
     OwnedArray<keyInfo>& getBuffer() { return active_buffer; };
-
+    void setBGColour(juce::Colour color)
+    {
+        grid.setBGColour(color);
+    }
 private:
 
     int staff_number = 0;

@@ -18,6 +18,7 @@ BarComponent::BarComponent(int bar, bool first)
     isFirstTime = first;
 
     bar_number = bar;
+    //setSize(160, getHeight());
 
     addAndMakeVisible(play_head);
 
@@ -28,7 +29,11 @@ BarComponent::BarComponent(int bar, bool first)
         notes.add(new NotesSectionComponent);
         addAndMakeVisible(notes[c]);
     }
-   
+
+    notes[0]->setBGColour(Colours::blueviolet);
+    notes[1]->setBGColour(Colours::coral);
+    notes[2]->setBGColour(Colours::greenyellow);
+    notes[3]->setBGColour(Colours::green);
 }
 
 BarComponent::~BarComponent()
@@ -133,12 +138,10 @@ void BarComponent::timerCallback()
 
         int sync = index % 11;  
 
-        
-
         if (sync==0) {
                 //sync buffer with the buffer 
-               
-                notes[current_section]->updateActiveBuffer((index/12)%4);
+            int val = (index / 12) % 4;
+            notes[current_section]->updateActiveBuffer((index / 12) % 4);
                 //if(index/12)
                 //current_section_buffer.add(current_section);
             }
@@ -165,7 +168,9 @@ void BarComponent::paint (juce::Graphics& g)
     g.drawRect(0, 0, getWidth(), getHeight());
     for (int c = 0; c < 5; c++)
     {
-        g.drawLine(0, (c+3) * getHeight() / 16, getWidth(), (c+3) * getHeight() / 16);
+        g.drawLine(0, (c+3) * getHeight() / 20, getWidth(), (c+3) * getHeight() / 20);
+
+        g.drawLine(0, (c + 13) * getHeight() / 20, getWidth(), (c + 13) * getHeight() / 20);
 
     }
  
@@ -182,4 +187,9 @@ void BarComponent::resized()
     {
         notes[c]->setBounds(c * getWidth() / size, 0, getWidth() / size, getHeight());
     }
+}
+
+void BarComponent::mouseDown(const MouseEvent& e)
+{
+
 }

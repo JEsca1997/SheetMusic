@@ -70,7 +70,7 @@ void SheetComponent::setState(bool state,int staff, int bar)
 void SheetComponent::paint (juce::Graphics& g)
 {
 
-    g.fillAll(Colours::white);
+    g.fillAll(Colours::grey);
 
     for(int c = 0; c < 8; c++)
     addAndMakeVisible(staffs[c]);
@@ -79,8 +79,11 @@ void SheetComponent::paint (juce::Graphics& g)
 
 void SheetComponent::resized()
 {
-    for (int c = 0; c < 6; c++)
+    int nRemHeight = getHeight() - 60;
+    for (int c = 0; c < 4; c++)
     {
-        staffs[c]->setBounds(getWidth()/8, c * 2 * getHeight() / 12 + 30, getWidth()/2, getHeight() / 6);
+        //staffs[c]->setBounds(getWidth()/8, c * 2 * getHeight() / 12 + 30, getWidth()/2, getHeight() / 6);
+        //staffs[c]->setBounds(getWidth() / 8, c *(nRemHeight / 4) + 30, getWidth() / 2, nRemHeight / 4);
+        staffs[c]->setBounds(getWidth() / 8, c * (nRemHeight / 4) + 30, getWidth() / 2, 200); //height for 20 rows
     }
 }

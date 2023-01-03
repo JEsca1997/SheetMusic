@@ -18,12 +18,16 @@ using namespace juce;
 StaffComponent::StaffComponent(int staff)
 {
     staff_num = staff;
+    //setSize(getWidth(), 200);
+
     for (int c = 0; c < 4; c++)
     {
         bars.add(new BarComponent(c,true));
         bars[c]->setStaffAndBarNumber(staff_num, c);
         addAndMakeVisible(bars[c]);
     }
+
+
     addAndMakeVisible(headerComponent);
 }
 
@@ -74,7 +78,13 @@ void StaffComponent::itemDropped(const SourceDetails& dragSourceDetails)
 
 void StaffComponent::paint (juce::Graphics& g)
 {
-    
+    //g.fillAll(Colours::aquamarine);
+    g.setColour(Colours::red);
+    g.drawRect(getLocalBounds());
+    g.setColour(Colours::khaki);
+    g.drawRect(0, 0, getWidth() / 5, getHeight());
+    g.setColour(Colours::black);
+    g.drawText(String("What is staff component"), 0, 0, getWidth() / 5, 100, Justification::centredTop);
 }
 
 void StaffComponent::resized()
