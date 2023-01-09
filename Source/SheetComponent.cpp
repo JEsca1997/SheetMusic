@@ -84,6 +84,6 @@ void SheetComponent::resized()
     {
         //staffs[c]->setBounds(getWidth()/8, c * 2 * getHeight() / 12 + 30, getWidth()/2, getHeight() / 6);
         //staffs[c]->setBounds(getWidth() / 8, c *(nRemHeight / 4) + 30, getWidth() / 2, nRemHeight / 4);
-        staffs[c]->setBounds(getWidth() / 8, c * (nRemHeight / 4) + 30, getWidth() / 2, 200); //height for 20 rows
+        staffs[c]->setBounds(getWidth() / 8, c * (nRemHeight / 4) + 30, getWidth() / 2, 200);
     }
 }

@@ -22,7 +22,7 @@ using namespace juce;
 /*
 */
 
-class BarComponent  : public juce::Component, public Timer
+class BarComponent  : public juce::Component//, public Timer
 {
 
 public:
@@ -30,7 +30,7 @@ public:
     BarComponent(int bar, bool first);
     ~BarComponent() override;
 
-    void timerCallback() override;
+    void timerCallback();// override;
 
     void paint (juce::Graphics&) override;
     void resized() override;

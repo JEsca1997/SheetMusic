@@ -39,14 +39,16 @@ void CellComponent::mouseDown(const MouseEvent& e)
 {
     isDown = !isDown;
     repaint();
-    DBG("va"+info.toString());
+   // DBG(info.toString());
 }
 
 void CellComponent::paint (juce::Graphics& g)
 {
     if (isDown)
     {
-        g.fillAll(Colours::red);
+        //g.fillAll(Colours::red);
+        g.setColour(Colours::red);
+        g.drawText(info.key, getLocalBounds(),Justification::centred);
     }
     else
     {

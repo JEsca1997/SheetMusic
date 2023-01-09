@@ -278,8 +278,12 @@ SheetMusicAudioProcessorEditor::SheetMusicAudioProcessorEditor (SheetMusicAudioP
     StaffSpacerUp(new TreeViewItemComponent("StaffSpacerUp")),
     StaffSpacerFixedDown(new TreeViewItemComponent("StaffSpacerFixedDown")),
     LinesLine(new TreeViewItemComponent("Line")),
-    BracketsLine(new TreeViewItemComponent("Line"))
+    BracketsLine(new TreeViewItemComponent("Line")),
+    objPlayHeadThread(this)
 {
+    addAndMakeVisible(&m_objPlayHead);
+    m_objPlayHead.setAlwaysOnTop(true);
+
     title.setColour(TextEditor::ColourIds::backgroundColourId, Colours::white);
     title.setColour(TextEditor::ColourIds::textColourId, Colours::black);
     addAndMakeVisible(title);
@@ -630,7 +634,7 @@ SheetMusicAudioProcessorEditor::SheetMusicAudioProcessorEditor (SheetMusicAudioP
         audioProcessor.loadFile();
     };
 
-    startTimer(42);
+    //startTimer(42);
 
     addAndMakeVisible(bpm);
 
@@ -650,11 +654,13 @@ void SheetMusicAudioProcessorEditor::playButtonPushed()
     {
         play_Button.setToggleState(false, NotificationType::dontSendNotification);
         play_state = true;
+        objPlayHeadThread.startThread();
     }
     else
     {
         play_Button.setToggleState(true, NotificationType::dontSendNotification);
         play_state = false;
+        objPlayHeadThread.stopThread(100);
     }
 
 }
@@ -753,4 +759,52 @@ void SheetMusicAudioProcessorEditor::resized()
 
     bpm.setBounds(28 * getWidth() / 33, getHeight() / 10, 5 * getWidth() / 33, getHeight() / 10);
 
+}
+
+void SheetMusicAudioProcessorEditor::SetPlayHeadPos(int x,int y,int w, int h)
+{
+    m_objPlayHead.setBounds(x, y, w, h);
+    //{
+    //    int nViewPos = m_nViewXpos * CSnapGrid::zoomfactor;
+    //    int xPos = objPlayHeadThread.GetXShift();// +m_nPausePos;
+    //    if (m_bPlay)
+    //    {
+    //        if ((xPos + m_nPlayHeadX + nViewPos) < 138)
+    //            audioHead.setVisible(false);
+    //        else
+    //        {
+    //            xPos += nViewPos;
+    //            audioHead.setVisible(true);
+    //            audioHead.setBounds(m_nPlayHeadX + xPos, 0, 10, getHeight() - 5);
+    //            //UpdateAutomationValues(m_nPlayHeadX + xPos-138);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (138 <= m_nPlayHeadX + nViewPos + xPos + m_nPlayHeadShift)
+    //        {
+    //            xPos += nViewPos;
+    //            audioHead.setVisible(true);
+    //            audioHead.setBounds(m_nPlayHeadX + xPos + m_nPlayHeadShift, 0, 10, getHeight() - 5);
+    //        }
+    //        else
+    //            audioHead.setVisible(false);
+    //    }
+    //}
+}
+void SheetMusicAudioProcessorEditor::PlayHeadThread::run()
+{
+    XShift = 0;
+    while (!threadShouldExit())
+    {    
+        const MessageManagerLock mml(Thread::getCurrentThread());
+
+        if (!mml.lockWasGained())  
+            break;
+
+        if (!m_bPauseShift)
+            XShift++;
+        objParent.SetPlayHeadPos(0, 0, 2, 100);
+        wait(39);
+    }
 }

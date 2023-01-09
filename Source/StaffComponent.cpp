@@ -18,8 +18,6 @@ using namespace juce;
 StaffComponent::StaffComponent(int staff)
 {
     staff_num = staff;
-    //setSize(getWidth(), 200);
-
     for (int c = 0; c < 4; c++)
     {
         bars.add(new BarComponent(c,true));
@@ -91,7 +89,8 @@ void StaffComponent::resized()
 {
     for (int c = 0; c < 4; c++)
     {
-        bars[c]->setBounds((c+1) * getWidth() / 5, 0, getWidth() / 5, getHeight());
+        //bars[c]->setBounds((c+1) * getWidth() / 5, 0, getWidth() / 5, getHeight());
+        bars[c]->setBounds((c + 1) * getWidth() / 5, 0, 160, getHeight());
     }
 
     headerComponent.setBounds(0, 0, getWidth() / 5, getHeight());

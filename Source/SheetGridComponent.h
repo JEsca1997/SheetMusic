@@ -58,8 +58,8 @@ public:
 
     String cellNumberToKey(int num);
 
-    String getTrebbleNote(int num);
-    String getBassNote(int num);
+    String getTrebbleNote(int mid, int num);
+    String getBassNote(int mid, int num);
 
 
     void addExtraBeat();
@@ -71,23 +71,15 @@ public:
 
     void updateActiveNotesBuffer(int bar);
     bool bufferPriorsCheck(Kinfo* info);
-    int roundOff(int n);
-
-    void addMessagetoBuffer(MidiMessage& message);
-
-    int getNoteNumber(String key);
 
     OwnedArray<Kinfo>* getActiveNotesBuffer() { return &active_notes_buffer; };
     void setBGColour(juce::Colour color)
     {
         bgCol = color;
     }
-
-   
-
 private:
 
-    //OwnedArray<OwnedArray<CellComponent>> cells;
+    OwnedArray<OwnedArray<CellComponent>> cells;
 
     OwnedArray<CellComponent> noteCollection;
 
@@ -96,13 +88,6 @@ private:
     int numCells = 5;
     int numBeats = 4;
 
-    MidiBuffer midiBuffer;
-    double sampleRate = 44100.0;
-    int previousSampleNumber = 0;
-
-    double startTime = Time::getMillisecondCounterHiRes() * 0.001;
-
     juce::Colour bgCol;
-   
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SheetGridComponent)
 };

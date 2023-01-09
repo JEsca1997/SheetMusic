@@ -12,27 +12,51 @@
 #include "PluginProcessor.h"
 #include "SheetComponent.h"
 #include "TreeViewItemComponent.h"
+#include "PlayheadComponent.h"
 
 //==============================================================================
 /**
 */
-class SheetMusicAudioProcessorEditor  : public juce::AudioProcessorEditor, public Timer
+class SheetMusicAudioProcessorEditor  : public juce::AudioProcessorEditor//, public Timer
 {
 public:
 
     SheetMusicAudioProcessorEditor (SheetMusicAudioProcessor&);
     ~SheetMusicAudioProcessorEditor() override;
 
-    void timerCallback() override;
+    void timerCallback();// override;
 
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+    void SetPlayHeadPos(int x, int y, int w, int h);
     void loadFile();
 
     void playButtonPushed();
 
 private:
+    class PlayHeadThread : public Thread
+    {
+    public:
+        PlayHeadThread(SheetMusicAudioProcessorEditor* pParent) : Thread("PlayHead thread"), objParent(*pParent) { xTempLimit = 0; }
+        void setTempLimit(int nXlimit) {
+            xTempLimit = nXlimit;
+        }
+        int GetXShift() { return  xTempLimit == 0 ? XShift : std::min(XShift, xTempLimit); }
+        int GetXValue() { return XShift; }
+        void ResetXShift() { XShift = 0; }
+        void pauseThread(bool bPause) { m_bPauseShift = bPause; }
+        void run() override;
+
+        bool m_bPauseShift = false;
+        SheetMusicAudioProcessorEditor& objParent;
+        std::atomic<int> XShift{ 0 };
+        std::atomic<int> xTempLimit;
+    };
+    PlayHeadThread objPlayHeadThread;
+    PlayheadComponent m_objPlayHead;
+
+
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     SheetMusicAudioProcessor& audioProcessor;

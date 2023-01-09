@@ -18,11 +18,10 @@ BarComponent::BarComponent(int bar, bool first)
     isFirstTime = first;
 
     bar_number = bar;
-    //setSize(160, getHeight());
 
     addAndMakeVisible(play_head);
 
-    startTimer(42);
+    //startTimer(42);
 
     for (int c = 0; c < 4; c++)
     {
@@ -138,10 +137,12 @@ void BarComponent::timerCallback()
 
         int sync = index % 11;  
 
+        
+
         if (sync==0) {
                 //sync buffer with the buffer 
-            int val = (index / 12) % 4;
-            notes[current_section]->updateActiveBuffer((index / 12) % 4);
+               
+                notes[current_section]->updateActiveBuffer((index/12)%4);
                 //if(index/12)
                 //current_section_buffer.add(current_section);
             }

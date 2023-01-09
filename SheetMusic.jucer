@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="YW8FYd" name="SheetMusic" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              defines="JUCE_MODAL_LOOPS_PERMITTED=1&#10;&#10;" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
+              defines="JUCE_MODAL_LOOPS_PERMITTED=1&#10;&#10;" pluginCharacteristicsValue="pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="P28E61" name="SheetMusic">
     <GROUP id="{7829994B-52D8-42B6-B9E2-BBB0C93996E4}" name="Resources">
       <FILE id="lOYL18" name="Bass_Clef.png" compile="0" resource="1" file="Resources/Bass_Clef.png"/>
