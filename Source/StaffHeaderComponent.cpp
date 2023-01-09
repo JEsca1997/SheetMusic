@@ -736,10 +736,13 @@ StaffHeaderComponent::~StaffHeaderComponent()
 
 void StaffHeaderComponent::paint (juce::Graphics& g)
 {
+    g.setColour(Colours::black);
     g.drawLine(0, 0, 0, getHeight());
     for (int c = 0; c < 5; c++)
     {
-        g.drawLine(0, (c+3) * getHeight() / 16, getWidth(), (c+3) * getHeight() / 16);
+        g.drawLine(0, (c+3) * getHeight() / 20, getWidth(), (c+3) * getHeight() / 20);
+
+        g.drawLine(0, (c + 13) * getHeight() / 20, getWidth(), (c + 13) * getHeight() / 20);
     }
 
 }
