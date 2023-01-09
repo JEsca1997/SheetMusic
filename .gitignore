@@ -1,4 +1,5 @@
-
+/Builds
+/JuceLibraryCode
 JuceLibraryCode/include_juce_audio_plugin_client_VST3.cpp
 JuceLibraryCode/include_juce_audio_plugin_client_VST_utils.mm
 JuceLibraryCode/include_juce_audio_processors.cpp
