@@ -35,6 +35,8 @@ public:
     BarComponent* getBarAt(int staff, int index);
     StaffComponent* getStaffAt(int index);
 
+    int getYPosition(int xPos);
+    void playnote(int xShift, int nIndex);
     OwnedArray<StaffComponent> staffs;
 
 private:

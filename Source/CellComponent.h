@@ -49,6 +49,7 @@ public:
 
     void mouseDown(const MouseEvent& e) override;
     void turnOn();
+    void setNoteNum(int num);
     void turnOff();
 
     bool downState() { return isDown; }
@@ -61,11 +62,14 @@ public:
     void setBeat(int bt) { info.setBeat(bt); };
     int getBeat() { return info.beat; };
     void setDownState(bool state) { info.isOn = state; };
-
+    int  getNoteNum() {
+        return m_nNoteNum;
+    }
 private:
 
     mInfo info { "", 0, false };
 
+    int m_nNoteNum = 60;
     int beat;
     String name;
     bool isDown = false; 

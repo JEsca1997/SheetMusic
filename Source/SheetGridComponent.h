@@ -54,12 +54,14 @@ public:
 
     void mouseDown(const MouseEvent& e) override;
 
+    void playnote(int xShift);
+
     void TriggerUpdate();
 
     String cellNumberToKey(int num);
 
-    String getTrebbleNote(int mid, int num);
-    String getBassNote(int mid, int num);
+    String getTrebbleNote(int mid, int num, int& nNoteNum);
+    String getBassNote(int mid, int num, int& nNoteNum);
 
 
     void addExtraBeat();

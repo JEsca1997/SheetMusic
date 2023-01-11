@@ -44,6 +44,7 @@ public:
 
     void paint (juce::Graphics&) override;
     void resized() override;
+    void playnote(int xShift);
     void turnOnBeat(String key);
     void turnOnBackgroundColoring(bool color);
     void setBarNumber(int bar);

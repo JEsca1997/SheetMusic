@@ -9,6 +9,8 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+MidiBuffer SheetMusicAudioProcessorEditor::g_midiBUffer;
+
 //==============================================================================
 SheetMusicAudioProcessorEditor::SheetMusicAudioProcessorEditor (SheetMusicAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p),
@@ -665,6 +667,18 @@ void SheetMusicAudioProcessorEditor::playButtonPushed()
 
 }
 
+void SheetMusicAudioProcessorEditor::handleAsyncUpdate()
+{
+    int xPos = objPlayHeadThread.GetXShift();
+    int yPos = sheet.getYPosition(objPlayHeadThread.GetYShift());
+    
+    xPos = xPos + sheet.getWidth() / 8 + getWidth() / 5.5 + 8;
+    yPos = yPos + 100 + 8 - sheet_port.getViewPositionY();
+    //if(yPos)
+    SetPlayHeadPos(xPos, yPos, 2, 200);
+    sheet.playnote(xPos, objPlayHeadThread.GetYShift());
+}
+
 void SheetMusicAudioProcessorEditor::timerCallback()
 {
 
@@ -794,17 +808,18 @@ void SheetMusicAudioProcessorEditor::SetPlayHeadPos(int x,int y,int w, int h)
 }
 void SheetMusicAudioProcessorEditor::PlayHeadThread::run()
 {
+    YShift = 0;
     XShift = 0;
     while (!threadShouldExit())
     {    
-        const MessageManagerLock mml(Thread::getCurrentThread());
+        //const MessageManagerLock mml(Thread::getCurrentThread());
 
-        if (!mml.lockWasGained())  
-            break;
-
+        //if (!mml.lockWasGained())  
+        //    break;
+        objParent.triggerAsyncUpdate();
+        wait(25);
         if (!m_bPauseShift)
             XShift++;
-        objParent.SetPlayHeadPos(0, 0, 2, 100);
-        wait(39);
+
     }
 }

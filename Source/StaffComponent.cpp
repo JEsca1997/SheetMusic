@@ -96,3 +96,11 @@ void StaffComponent::resized()
     headerComponent.setBounds(0, 0, getWidth() / 5, getHeight());
 
 }
+
+void StaffComponent::playnote(int xShift)
+{
+    int xTemp = xShift - 590;
+    int barIndex = xTemp / 190;
+    bars[barIndex]->playnote(xTemp % 190);
+   // DBG(xShift);
+}

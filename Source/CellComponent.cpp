@@ -30,6 +30,10 @@ void CellComponent::turnOn()
     isDown = true;
     repaint();
 }
+void CellComponent::setNoteNum(int num)
+{
+    m_nNoteNum = num;
+}
 void CellComponent::turnOff()
 {
     isDown = false;

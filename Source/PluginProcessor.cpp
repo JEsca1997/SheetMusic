@@ -159,6 +159,7 @@ void SheetMusicAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
 
+    midiMessages.swapWith(SheetMusicAudioProcessorEditor::g_midiBUffer);
     for (auto i = totalNumInputChannels; i < getTotalNumOutputChannels(); ++i)
     {
         buffer.clear(i, 0, buffer.getNumSamples());
@@ -166,26 +167,26 @@ void SheetMusicAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
 
      mSampler.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 
-     if (midiMessages.getNumEvents() != 0)
-     {
-         int index = 0;
-         for (auto message : midiMessages)
-         {
-             auto key = message.getMessage().getMidiNoteName(message.getMessage().getNoteNumber(), true, false, 4);
-             auto isOn = message.getMessage().isNoteOn();
-             if (message.getMessage().isNoteOn())
-             {
-                 auto* key_info = new KeyInfo(key, isOn);
-                 key_infos.push_back(*key_info);
-             }
-             else if (message.getMessage().isNoteOff())
-             {
-                 key_infos.erase(key_infos.begin() + index);
-                 index--;
-             }
-             index++;
-         }
-     }
+     //if (midiMessages.getNumEvents() != 0)
+     //{
+     //    int index = 0;
+     //    for (auto message : midiMessages)
+     //    {
+     //        auto key = message.getMessage().getMidiNoteName(message.getMessage().getNoteNumber(), true, false, 4);
+     //        auto isOn = message.getMessage().isNoteOn();
+     //        if (message.getMessage().isNoteOn())
+     //        {
+     //            auto* key_info = new KeyInfo(key, isOn);
+     //            key_infos.push_back(*key_info);
+     //        }
+     //        else if (message.getMessage().isNoteOff())
+     //        {
+     //            key_infos.erase(key_infos.begin() + index);
+     //            index--;
+     //        }
+     //        index++;
+     //    }
+     //}
 
 }
 

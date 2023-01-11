@@ -194,3 +194,11 @@ void BarComponent::mouseDown(const MouseEvent& e)
 {
 
 }
+
+void BarComponent::playnote(int xShift)
+{
+    int nNoteSectionIndex = xShift / notes[0]->getWidth();
+    //if(nNoteSectionIndex > 0)
+    notes[nNoteSectionIndex]->playnote(xShift % notes[0]->getWidth());
+    //DBG(xShift);
+}

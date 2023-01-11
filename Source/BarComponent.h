@@ -36,6 +36,7 @@ public:
     void resized() override;
 
     void mouseDown(const MouseEvent& e) override;
+    void playnote(int xShift);
     void setBGColour(juce::Colour color)
     {
         bgCol = color;

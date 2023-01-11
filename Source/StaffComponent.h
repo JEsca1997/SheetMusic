@@ -34,6 +34,7 @@ public:
     void addBeat();
     void paint (juce::Graphics&) override;
     void resized() override;
+    void playnote(int xShift);
     void addLine();
     void turnOnBeat(String key, int bar, int beat);
     BarComponent* getBarAt(int index);

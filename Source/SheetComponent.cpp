@@ -58,6 +58,16 @@ StaffComponent* SheetComponent::getStaffAt(int index)
     return staffs[index];
 }
 
+int SheetComponent::getYPosition(int nIndex)
+{
+    return staffs[nIndex]->getY();
+}
+
+void SheetComponent::playnote(int xShift, int nIndex)
+{
+    staffs[nIndex]->playnote(xShift);
+}
+
 void SheetComponent::setState(bool state,int staff, int bar)
 {
     // create cross coms for playhead position to bar length, trigger playheads in sequence

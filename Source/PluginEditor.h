@@ -17,9 +17,11 @@
 //==============================================================================
 /**
 */
-class SheetMusicAudioProcessorEditor  : public juce::AudioProcessorEditor//, public Timer
+class SheetMusicAudioProcessorEditor  : public juce::AudioProcessorEditor, public AsyncUpdater//, public Timer
 {
 public:
+
+    static MidiBuffer g_midiBUffer;
 
     SheetMusicAudioProcessorEditor (SheetMusicAudioProcessor&);
     ~SheetMusicAudioProcessorEditor() override;
@@ -33,7 +35,7 @@ public:
     void loadFile();
 
     void playButtonPushed();
-
+    void handleAsyncUpdate() override;
 private:
     class PlayHeadThread : public Thread
     {
@@ -42,7 +44,19 @@ private:
         void setTempLimit(int nXlimit) {
             xTempLimit = nXlimit;
         }
-        int GetXShift() { return  xTempLimit == 0 ? XShift : std::min(XShift, xTempLimit); }
+        int GetXShift() { 
+            int temp = XShift / 160;
+            if (temp == 4)
+            {
+                temp = 0;
+                XShift = 0;
+                YShift++;
+                if (YShift > 3)
+                    YShift = 0;
+            }
+            return  XShift + 30 * temp;
+        }
+        int GetYShift() { return YShift; }
         int GetXValue() { return XShift; }
         void ResetXShift() { XShift = 0; }
         void pauseThread(bool bPause) { m_bPauseShift = bPause; }
@@ -51,6 +65,7 @@ private:
         bool m_bPauseShift = false;
         SheetMusicAudioProcessorEditor& objParent;
         std::atomic<int> XShift{ 0 };
+        std::atomic<int> YShift{ 0 };
         std::atomic<int> xTempLimit;
     };
     PlayHeadThread objPlayHeadThread;
@@ -380,6 +395,7 @@ private:
 
     TextEditor title{ "Title" };
     TextEditor author{ "Author" };
+
    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SheetMusicAudioProcessorEditor)
 };

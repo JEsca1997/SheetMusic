@@ -75,3 +75,9 @@ void NotesSectionComponent::resized()
 {
     grid.setBounds(0, 0, getWidth(), getHeight());
 }
+
+
+void NotesSectionComponent::playnote(int xShift)
+{
+    grid.playnote(xShift);
+}

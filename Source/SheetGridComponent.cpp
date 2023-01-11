@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "SheetGridComponent.h"
 
+#include "PluginEditor.h"
 using namespace juce;
 
 //==============================================================================
@@ -61,43 +62,54 @@ String SheetGridComponent::cellNumberToKey(int num)
     }
 }
 
-String SheetGridComponent::getTrebbleNote(int mid, int num)
+String SheetGridComponent::getTrebbleNote(int mid, int num, int& nNoteNum)
 {
     if (mid == 0)
     {
         switch (num)
         {
         case 0:
+            nNoteNum = 50;
             return "D";
             break;
         case 1:
+            nNoteNum = 59;
             return "B";
             break;
         case 2:
+            nNoteNum = 55;
             return "G"; //staff
             break;
         case 3:
+            nNoteNum = 52;
             return "E"; //space
             break;
         case 4:
+            nNoteNum = 48;
             return "C"; //staff
             break;
         case 5:
+            nNoteNum = 57;
             return "A"; //space
             break;
         case 6:
+            nNoteNum = 53;
             return "F"; //staff
             break;
         case 7:
+            nNoteNum = 50;
             return "D"; //space
             break;
         case 8:
+            nNoteNum = 59;
             return "B"; //staff
             break;
         case 9:
+            nNoteNum = 55;
             return "G"; //space
             break;
         case 10:
+            nNoteNum = 52;
             return "E"; //staff
             break;
         default:
@@ -109,36 +121,47 @@ String SheetGridComponent::getTrebbleNote(int mid, int num)
         switch (num)
         {
         case 0:
+            nNoteNum = 49;
             return "C"; //staff
             break;
         case 1:
+            nNoteNum = 58;
             return "A"; //space
             break;
         case 2:
+            nNoteNum = 54;
             return "F"; //staff
             break;
         case 3:
+            nNoteNum = 51;
             return "D"; //space
             break;
         case 4:
+            nNoteNum = 58;
             return "B"; //staff
             break;
         case 5:
+            nNoteNum = 56;
             return "G"; //space
             break;
         case 6:
+            nNoteNum = 51;
             return "E"; //staff
             break;
         case 7:
+            nNoteNum = 49;
             return "C"; //space
             break;
         case 8:
+            nNoteNum = 58;
             return "A"; //staff
             break;
         case 9:
+            nNoteNum = 54;
             return "F"; //space
             break;
         case 10:
+            nNoteNum = 51;
             return "D"; //staff
             break;
         default:
@@ -148,7 +171,7 @@ String SheetGridComponent::getTrebbleNote(int mid, int num)
 }
 
 
-String SheetGridComponent::getBassNote(int mid, int num) 
+String SheetGridComponent::getBassNote(int mid, int num, int& nNoteNum)
 {
 
     if (mid == 0)
@@ -156,36 +179,47 @@ String SheetGridComponent::getBassNote(int mid, int num)
         switch (num)
         {
         case 0:
+            nNoteNum = 65;
             return "F";
             break;
         case 1:
+            nNoteNum = 62;
             return "D";
             break;
         case 2:
+            nNoteNum = 71;
             return "B"; //staff
             break;
         case 3:
+            nNoteNum = 67;
             return "G"; //space
             break;
         case 4:
+            nNoteNum = 64;
             return "E"; //staff
             break;
         case 5:
+            nNoteNum = 72;
             return "C"; //space
             break;
         case 6:
+            nNoteNum = 69;
             return "A"; //staff
             break;
         case 7:
+            nNoteNum = 65;
             return "F"; //space
             break;
         case 8:
+            nNoteNum = 62;
             return "D"; //staff
             break;
         case 9:
+            nNoteNum = 71;
             return "B"; //space
             break;
         case 10:
+            nNoteNum = 67;
             return "G"; //staff
             break;
         default:
@@ -197,36 +231,47 @@ String SheetGridComponent::getBassNote(int mid, int num)
         switch (num)
         {
         case 0:
+            nNoteNum = 63;
             return "E"; //staff
             break;
         case 1:
+            nNoteNum = 61;
             return "C"; //space
             break;
         case 2:
+            nNoteNum = 70;
             return "A"; //staff
             break;
         case 3:
+            nNoteNum = 66;
             return "F"; //space
             break;
         case 4:
+            nNoteNum = 63;
             return "D"; //staff
             break;
         case 5:
+            nNoteNum = 70;
             return "B"; //space
             break;
         case 6:
+            nNoteNum = 68;
             return "G"; //staff
             break;
         case 7:
+            nNoteNum = 63;
             return "E"; //space
             break;
         case 8:
+            nNoteNum = 61;
             return "C"; //staff
             break;
         case 9:
+            nNoteNum = 70;
             return "A"; //space
             break;
         case 10:
+            nNoteNum = 66;
             return "F"; //staff
             break;
         default:
@@ -468,12 +513,14 @@ void SheetGridComponent::mouseDown(const MouseEvent& e)
                 noteY += rowHeight / 2;
             }
         }
-        strNote = getBassNote(noteY % rowHeight, noteY / rowHeight);
+        int nNoteNum = 60;
+        strNote = getBassNote(noteY % rowHeight, noteY / rowHeight, nNoteNum);
         if (strNote.isEmpty())
-            String brk = "";
+            return;
         noteCollection.add(new CellComponent(strNote, nCol, true));
         addAndMakeVisible(noteCollection.getLast());
         noteCollection.getLast()->turnOn();
+        noteCollection.getLast()->setNoteNum(nNoteNum);
         noteCollection.getLast()->setBounds(noteX, noteY + getHeight() / 2, getWidth() / 4, rowHeight);
     }
     else
@@ -502,12 +549,65 @@ void SheetGridComponent::mouseDown(const MouseEvent& e)
                 noteY += rowHeight / 2;
             }
         }
-        strNote = getTrebbleNote(noteY % rowHeight, noteY / rowHeight);
+        int nNoteNum = 60;
+        strNote = getTrebbleNote(noteY % rowHeight, noteY / rowHeight, nNoteNum);
         if (strNote.isEmpty())
-            String brk = "";
+            return;
         noteCollection.add(new CellComponent(strNote, nCol, true));
         addAndMakeVisible(noteCollection.getLast());
         noteCollection.getLast()->turnOn();
+        noteCollection.getLast()->setNoteNum(nNoteNum);
         noteCollection.getLast()->setBounds(noteX, noteY, getWidth() / 4, rowHeight);
+    }
+}
+
+
+void SheetGridComponent::playnote(int xShift)
+{
+    if ((xShift % (getWidth() / 4)) == 0)
+    {
+        for (CellComponent* c : noteCollection)
+        {
+            if (c->getBeat() == (xShift / (getWidth() / 4)) && c->downState())
+            {
+                String key = c->getKey();
+                int beat = c->getBeat();
+                auto* info = new Kinfo(key, beat, true);
+                DBG(info->toString() + "In Sheet grid component");
+                if (key.isEmpty())
+                    String brk = "";
+
+                const MidiMessage mOn(MidiMessage::noteOn(1, c->getNoteNum(), (uint8)100), Time::getMillisecondCounterHiRes() * 0.001);
+                MidiBuffer buff(mOn);
+                SheetMusicAudioProcessorEditor::g_midiBUffer.swapWith(buff);
+                //msgCollector->addMessageToQueue(mOn);
+
+                //MidiMessage mOff(MidiMessage::noteOff(1, c->getNoteNum(), (uint8)100), Time::getMillisecondCounterHiRes() * 0.001);
+                //m_pMsgCollector->addMessageToQueue(mOff);
+            }
+        }
+    }
+    if (((xShift + 1) % (getWidth() / 4)) == 0)
+    {
+        for (CellComponent* c : noteCollection)
+        {
+            if (c->getBeat() == (xShift / (getWidth() / 4)) && c->downState())
+            {
+                String key = c->getKey();
+                int beat = c->getBeat();
+                auto* info = new Kinfo(key, beat, true);
+                DBG(info->toString() + "Leaving grid component");
+                if (key.isEmpty())
+                    String brk = "";
+
+                //MidiMessage mOn(MidiMessage::noteOn(1, c->getNoteNum(), (uint8)100), Time::getMillisecondCounterHiRes() * 0.001);
+                //msgCollector->addMessageToQueue(mOn);
+
+                MidiMessage mOff(MidiMessage::noteOff(1, c->getNoteNum(), (uint8)100), Time::getMillisecondCounterHiRes() * 0.001);
+                MidiBuffer buff(mOff);
+                SheetMusicAudioProcessorEditor::g_midiBUffer.swapWith(buff);
+                //m_pMsgCollector->addMessageToQueue(mOff);
+            }
+        }
     }
 }
